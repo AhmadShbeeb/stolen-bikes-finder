@@ -1,3 +1,4 @@
+import { SearchForm } from '@/components/forms/search-form';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function BikesPage() {
-  return <div>Bikes</div>;
+  return (
+    <div className="flex flex-col gap-6">
+      <h1 className="self-center text-center text-3xl font-bold">Search for nearby stolen bikes in Munich</h1>
+      <SearchForm />
+    </div>
+  );
 }

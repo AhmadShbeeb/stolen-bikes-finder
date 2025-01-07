@@ -9,7 +9,7 @@ export function Header() {
   const pathname = usePathname();
   return (
     <nav className="border-b bg-background">
-      <div className="container mx-auto px-4 py-1">
+      <div className="container mx-auto px-10 py-1">
         <div className="flex items-center justify-between">
           <Link href="/" className="hover:opacity-80">
             <Image src="/bike-logo.svg" alt="Bike" width={50} height={50} />
