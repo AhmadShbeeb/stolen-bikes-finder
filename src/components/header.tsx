@@ -15,16 +15,14 @@ export function Header() {
             <Image src="/bike-logo.svg" alt="Bike" width={50} height={50} />
           </Link>
 
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" asChild>
-              <Link
-                href="/bikes"
-                className={pathname === '/bikes' ? 'bg-primary text-white hover:bg-primary/90 hover:text-white' : ''}
-              >
-                Search Bikes
-              </Link>
-            </Button>
-          </div>
+          <Button variant="ghost" asChild>
+            <Link
+              href="/bikes"
+              className={pathname === '/bikes' ? 'bg-primary text-white hover:bg-primary/90 hover:text-white' : ''}
+            >
+              Search Stolen Bikes
+            </Link>
+          </Button>
         </div>
       </div>
     </nav>
