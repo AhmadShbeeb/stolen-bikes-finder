@@ -58,7 +58,7 @@ export function DateRangePickerForm<T extends FieldValues>({
                 selected={field.value as DateRange}
                 onSelect={field.onChange}
                 initialFocus
-                numberOfMonths={2}
+                numberOfMonths={1}
               />
             </PopoverContent>
           </Popover>

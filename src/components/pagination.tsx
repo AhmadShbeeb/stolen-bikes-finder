@@ -16,7 +16,8 @@ export function Pagination({ total, pushUrl }: PaginationProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
-  const totalPages = Math.ceil(total / DEFAULT_PAGE_SIZE);
+  const perPage = Number(searchParams.get('perPage')) || DEFAULT_PAGE_SIZE;
+  const totalPages = Math.ceil(total / perPage);
 
   const handlePageChange = (newPage: number) => {
     const queryString = createQueryString({ page: newPage.toString() });
@@ -25,7 +26,7 @@ export function Pagination({ total, pushUrl }: PaginationProps) {
 
   const handlePageSizeChange = (newSize: string) => {
     const queryString = createQueryString({
-      limit: newSize,
+      perPage: newSize,
       page: '1', // Reset to first page when changing page size
     });
     router.push(`${pushUrl}?${queryString}`);
@@ -76,7 +77,10 @@ export function Pagination({ total, pushUrl }: PaginationProps) {
         {'>>'}
       </Button>
 
-      <Select defaultValue={DEFAULT_PAGE_SIZE.toString()} onValueChange={handlePageSizeChange}>
+      <Select
+        defaultValue={searchParams.get('perPage') || DEFAULT_PAGE_SIZE.toString()}
+        onValueChange={handlePageSizeChange}
+      >
         <SelectTrigger className="w-[100px]">
           <SelectValue placeholder="Page Size" />
         </SelectTrigger>
