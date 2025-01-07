@@ -1,3 +1,4 @@
+import { BikesGrid } from '@/components/bikes-grid';
 import { SearchForm } from '@/components/forms/search-form';
 import type { Metadata } from 'next';
 
@@ -11,7 +12,10 @@ export default function BikesPage() {
   return (
     <div className="flex flex-col gap-6">
       <h1 className="self-center text-center text-3xl font-bold">Search for nearby stolen bikes in Munich</h1>
-      <SearchForm />
+      <div className="flex gap-6">
+        <SearchForm />
+        <BikesGrid />
+      </div>
     </div>
   );
 }

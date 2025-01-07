@@ -1,7 +1,10 @@
 'use client';
 
+import { useCreateQueryString } from '@/hooks/useCreateQueryString';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { format } from 'date-fns';
 import { Search } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '../ui/button';
@@ -25,17 +28,32 @@ const searchFormSchema = z.object({
 });
 
 export function SearchForm() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const createQueryString = useCreateQueryString();
+
   const searchForm = useForm<z.infer<typeof searchFormSchema>>({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
-      caseTitle: '',
+      caseTitle: searchParams.get('caseTitle') ?? '',
+      dateRange:
+        searchParams.get('dateFrom') && searchParams.get('dateTo')
+          ? {
+              from: new Date(searchParams.get('dateFrom')!),
+              to: new Date(searchParams.get('dateTo')!),
+            }
+          : undefined,
     },
   });
 
   function onSubmit(values: z.infer<typeof searchFormSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    router.push(
+      `bikes?${createQueryString({
+        caseTitle: values.caseTitle ?? null,
+        dateFrom: values.dateRange?.from ? format(values.dateRange?.from, 'yyyy-MM-dd') : null,
+        dateTo: values.dateRange?.to ? format(values.dateRange?.to, 'yyyy-MM-dd') : null,
+      })}`,
+    );
   }
 
   return (
