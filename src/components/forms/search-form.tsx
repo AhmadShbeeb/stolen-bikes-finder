@@ -47,13 +47,13 @@ export function SearchForm() {
   });
 
   function onSubmit(values: z.infer<typeof searchFormSchema>) {
-    router.push(
-      `bikes?${createQueryString({
-        caseTitle: values.caseTitle ?? null,
-        dateFrom: values.dateRange?.from ? format(values.dateRange?.from, 'yyyy-MM-dd') : null,
-        dateTo: values.dateRange?.to ? format(values.dateRange?.to, 'yyyy-MM-dd') : null,
-      })}`,
-    );
+    const queryString = createQueryString({
+      caseTitle: values.caseTitle ?? null,
+      dateFrom: values.dateRange?.from ? format(values.dateRange?.from, 'yyyy-MM-dd') : null,
+      dateTo: values.dateRange?.to ? format(values.dateRange?.to, 'yyyy-MM-dd') : null,
+    });
+
+    router.push(`/bikes?${queryString}`);
   }
 
   return (
