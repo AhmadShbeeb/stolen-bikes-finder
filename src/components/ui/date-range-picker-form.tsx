@@ -6,7 +6,7 @@ import { PopoverContent, PopoverTrigger } from './popover';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from './calendar';
-import { FormField, FormItem, FormMessage } from './form';
+import { FormField, FormItem } from './form';
 import { Popover } from './popover';
 import { DateRange } from 'react-day-picker';
 
@@ -27,7 +27,7 @@ export function DateRangePickerForm<T extends FieldValues>({
     <FormField
       control={control}
       name={name}
-      render={({ field }) => (
+      render={({ field, formState: { errors } }) => (
         <FormItem className="flex flex-col">
           {label && <FormLabel>{label}</FormLabel>}
           <Popover>
@@ -62,7 +62,7 @@ export function DateRangePickerForm<T extends FieldValues>({
               />
             </PopoverContent>
           </Popover>
-          <FormMessage />
+          {errors[name] && <p className="text-red-500">Please select a valid date range</p>}
         </FormItem>
       )}
     />

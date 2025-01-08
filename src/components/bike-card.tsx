@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { format } from 'date-fns';
 import { Bike } from '@/types/bike';
 import Image from 'next/image';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 interface BikeCardProps {
   bike: Bike;
@@ -28,9 +29,7 @@ export function BikeCard({ bike }: BikeCardProps) {
       </CardHeader>
 
       <CardContent className="p-3">
-        <p className="line-clamp-3 text-sm text-muted-foreground">
-          {!!bike?.description ? bike.description : 'No description available'}
-        </p>
+        <DescriptionTooltip description={bike?.description} />
       </CardContent>
 
       <CardFooter className="flex items-center justify-between p-3">
@@ -48,5 +47,24 @@ export function BikeCard({ bike }: BikeCardProps) {
         {/* <span className="font-bold">Report Date: {format(new Date(), 'MM/dd/yyyy')}</span> */}
       </CardFooter>
     </Card>
+  );
+}
+
+function DescriptionTooltip({ description }: { description: Bike['description'] }) {
+  return (
+    <TooltipProvider>
+      <Tooltip delayDuration={200}>
+        <TooltipTrigger asChild>
+          <p className="line-clamp-3 text-sm text-muted-foreground">
+            {!!description ? description : 'No description available'}
+          </p>
+        </TooltipTrigger>
+        {!!description && (
+          <TooltipContent className="max-w-[380px] bg-gray-500" side="top" arrowClassName="fill-gray-500">
+            <p>{description}</p>
+          </TooltipContent>
+        )}
+      </Tooltip>
+    </TooltipProvider>
   );
 }
