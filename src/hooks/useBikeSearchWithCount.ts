@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 export const useBikeSearchWithCount = () => {
   const searchParams = useSearchParams();
   const params = {
-    query: searchParams.get('query') || '',
+    caseTitle: searchParams.get('caseTitle') || '',
     page: parseInt(searchParams.get('page') || '1'),
     perPage: parseInt(searchParams.get('perPage') || '10'),
     distance: parseInt(searchParams.get('distance') || '10'),
@@ -18,11 +18,11 @@ export const useBikeSearchWithCount = () => {
     queryFn: async ({ signal }) => {
       const [bikesResponse, countResponse] = await Promise.all([
         axios.get<BikeSearchResponse>(
-          `/search?query=${params.query}&page=${params.page}&per_page=${params.perPage}&location=${SEARCH_LOCATION}&stolenness=proximity&distance=${params.distance}`,
+          `/search?query=${params.caseTitle}&page=${params.page}&per_page=${params.perPage}&location=${SEARCH_LOCATION}&stolenness=proximity&distance=${params.distance}`,
           { signal },
         ),
         axios.get<BikeSearchCountResponse>(
-          `/search/count?query=${params.query}&location=${SEARCH_LOCATION}&stolenness=proximity&distance=${params.distance}`,
+          `/search/count?query=${params.caseTitle}&location=${SEARCH_LOCATION}&stolenness=proximity&distance=${params.distance}`,
           { signal },
         ),
       ]);
@@ -30,7 +30,7 @@ export const useBikeSearchWithCount = () => {
       return { bikes: bikesResponse.data, count: countResponse.data };
     },
     select: (data) => ({ bikes: data.bikes.bikes, count: data.count }),
-    enabled: !!params.query || !!params.page || !!params.perPage,
+    enabled: !!params.caseTitle || !!params.page || !!params.perPage,
   });
 
   return queryBikeSearchWithCount;
