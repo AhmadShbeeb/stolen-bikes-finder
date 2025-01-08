@@ -35,7 +35,7 @@ export function DateRangePickerForm<T extends FieldValues>({
               <FormControl>
                 <Button
                   variant={'outline'}
-                  className={cn('min-w-[200px] pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
+                  className={cn('pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
                 >
                   {field.value?.from ? (
                     field.value.to ? (

@@ -51,11 +51,11 @@ export function SearchForm() {
   }
 
   return (
-    <div className="flex w-1/4 flex-col justify-center gap-4">
-      <p className="text-lg">Filters:</p>
+    <div className="flex w-1/4 flex-col justify-center gap-4 rounded-xl border-2 p-2.5 md:w-1/6">
+      <p className="border-b-2 pb-2 text-lg font-semibold">Filters:</p>
 
       <Form {...searchForm}>
-        <form onSubmit={searchForm.handleSubmit(onSubmit)} className="flex min-w-[210px] flex-col gap-8">
+        <form onSubmit={searchForm.handleSubmit(onSubmit)} className="flex min-w-[8rem] flex-col gap-8">
           <InputForm control={searchForm.control} name="caseTitle" label="Case title" />
           <DateRangePickerForm control={searchForm.control} name="dateRange" label="Date range" />
           <InputForm control={searchForm.control} name="distance" label="Distance" type="number" />

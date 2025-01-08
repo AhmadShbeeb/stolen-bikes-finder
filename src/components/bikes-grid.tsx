@@ -17,7 +17,7 @@ export function BikesGrid() {
   if (data.bikes.length === 0) return <NotFound />;
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex w-5/6 flex-col gap-2">
       <p className="text-gray-600">{data.count.proximity} results found</p>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
