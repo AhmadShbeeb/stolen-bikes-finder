@@ -57,8 +57,8 @@ export function SearchForm() {
       <Form {...searchForm}>
         <form onSubmit={searchForm.handleSubmit(onSubmit)} className="flex min-w-[8rem] flex-col gap-8">
           <InputForm control={searchForm.control} name="caseTitle" label="Case title" />
-          <DateRangePickerForm control={searchForm.control} name="dateRange" label="Date range" />
           <InputForm control={searchForm.control} name="distance" label="Distance" type="number" />
+          <DateRangePickerForm control={searchForm.control} name="dateRange" label="Date range" />
 
           <Button type="submit">
             Search <Search className="h-4 w-4" />

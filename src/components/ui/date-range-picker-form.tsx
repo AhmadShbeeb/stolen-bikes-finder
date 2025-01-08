@@ -29,7 +29,11 @@ export function DateRangePickerForm<T extends FieldValues>({
       name={name}
       render={({ field, formState: { errors } }) => (
         <FormItem className="flex flex-col">
-          {label && <FormLabel>{label}</FormLabel>}
+          {label && (
+            <FormLabel>
+              {label} <span className="text-xs text-gray-500">(no API implementation)</span>
+            </FormLabel>
+          )}
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
@@ -62,7 +66,7 @@ export function DateRangePickerForm<T extends FieldValues>({
               />
             </PopoverContent>
           </Popover>
-          {errors[name] && <p className="text-red-500">Please select a valid date range</p>}
+          {errors[name] && <p className="text-sm text-red-500">Please select a valid date range</p>}
         </FormItem>
       )}
     />
