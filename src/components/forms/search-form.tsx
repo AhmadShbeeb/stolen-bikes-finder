@@ -31,6 +31,7 @@ export function SearchForm() {
               to: new Date(searchParams.get('dateTo')!),
             }
           : undefined,
+      distance: parseInt(searchParams.get('distance') || '10'),
     },
   });
 
@@ -41,6 +42,7 @@ export function SearchForm() {
       dateTo: values.dateRange?.to ? format(values.dateRange?.to, 'yyyy-MM-dd') : null,
       page: null,
       perPage: null,
+      distance: values.distance ? values.distance.toString() : null,
     });
 
     queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.BIKE_SEARCH], exact: false });
@@ -56,6 +58,7 @@ export function SearchForm() {
         <form onSubmit={searchForm.handleSubmit(onSubmit)} className="flex min-w-[210px] flex-col gap-8">
           <InputForm control={searchForm.control} name="caseTitle" label="Case title" />
           <DateRangePickerForm control={searchForm.control} name="dateRange" label="Date range" />
+          <InputForm control={searchForm.control} name="distance" label="Distance" type="number" />
 
           <Button type="submit">
             Search <Search className="h-4 w-4" />

@@ -15,8 +15,8 @@ export function Pagination({ total, pushUrl }: PaginationProps) {
   const createQueryString = useCreateQueryString();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
-  const perPage = Number(searchParams.get('perPage')) || DEFAULT_PAGE_SIZE;
+  const currentPage = parseInt(searchParams.get('page') || '1');
+  const perPage = parseInt(searchParams.get('perPage') || DEFAULT_PAGE_SIZE.toString());
   const totalPages = Math.ceil(total / perPage);
 
   const handlePageChange = (newPage: number) => {

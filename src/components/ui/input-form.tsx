@@ -12,9 +12,10 @@ interface InputFormProps<T extends FieldValues> {
   name: Path<T>;
   label?: string;
   placeholder?: string;
+  type?: string;
 }
 
-export function InputForm<T extends FieldValues>({ control, name, label, placeholder }: InputFormProps<T>) {
+export function InputForm<T extends FieldValues>({ control, name, label, placeholder, type }: InputFormProps<T>) {
   return (
     <FormField
       control={control}
@@ -23,7 +24,7 @@ export function InputForm<T extends FieldValues>({ control, name, label, placeho
         <FormItem>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Input placeholder={placeholder} {...field} />
+            <Input placeholder={placeholder} type={type} {...field} />
           </FormControl>
           <FormMessage />
         </FormItem>

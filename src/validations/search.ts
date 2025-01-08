@@ -13,6 +13,7 @@ export const searchFormSchema = z.object({
       return true;
     })
     .optional(),
+  distance: z.coerce.number().optional(),
 });
 
 export type SearchFormSchema = z.infer<typeof searchFormSchema>;

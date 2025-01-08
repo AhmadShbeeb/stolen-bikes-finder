@@ -10,6 +10,7 @@ export const useBikeSearchWithCount = () => {
     query: searchParams.get('query') || '',
     page: parseInt(searchParams.get('page') || '1'),
     perPage: parseInt(searchParams.get('perPage') || '10'),
+    distance: parseInt(searchParams.get('distance') || '10'),
   };
 
   const queryBikeSearchWithCount = useQuery({
@@ -17,11 +18,11 @@ export const useBikeSearchWithCount = () => {
     queryFn: async ({ signal }) => {
       const [bikesResponse, countResponse] = await Promise.all([
         axios.get<BikeSearchResponse>(
-          `/search?query=${params.query}&page=${params.page}&per_page=${params.perPage}&location=${SEARCH_LOCATION}&stolenness=proximity`,
+          `/search?query=${params.query}&page=${params.page}&per_page=${params.perPage}&location=${SEARCH_LOCATION}&stolenness=proximity&distance=${params.distance}`,
           { signal },
         ),
         axios.get<BikeSearchCountResponse>(
-          `/search/count?query=${params.query}&location=${SEARCH_LOCATION}&stolenness=proximity`,
+          `/search/count?query=${params.query}&location=${SEARCH_LOCATION}&stolenness=proximity&distance=${params.distance}`,
           { signal },
         ),
       ]);
