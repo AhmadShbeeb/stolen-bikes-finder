@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Stolen Bikes',
+  title: 'Stolen Bikes Finder',
   description:
     'Track and report stolen bikes in your area. Help your community recover stolen bicycles and prevent bike theft.',
 };

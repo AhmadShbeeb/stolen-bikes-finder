@@ -6,7 +6,7 @@ import { SearchFormSchema, searchFormSchema } from '@/validations/search';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { Search } from 'lucide-react';
+import { Search, RotateCcw } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
@@ -50,6 +50,17 @@ export function SearchForm() {
     router.push(`/bikes?${queryString}`);
   }
 
+  function onReset() {
+    searchForm.reset({
+      caseTitle: '',
+      dateRange: undefined,
+      distance: 10,
+    });
+
+    queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.BIKE_SEARCH], exact: false });
+    router.push('/bikes');
+  }
+
   return (
     <div className="flex w-1/4 flex-col justify-center gap-4 rounded-xl border-2 p-2.5 md:w-1/6">
       <p className="border-b-2 pb-2 text-lg font-semibold">Filters:</p>
@@ -60,9 +71,14 @@ export function SearchForm() {
           <InputForm control={searchForm.control} name="distance" label="Distance" type="number" />
           <DateRangePickerForm control={searchForm.control} name="dateRange" label="Date range" />
 
-          <Button type="submit">
-            Search <Search className="h-4 w-4" />
-          </Button>
+          <div className="flex gap-2">
+            <Button type="submit" className="flex-1">
+              Search <Search className="ml-2 h-4 w-4" />
+            </Button>
+            <Button type="button" variant="outline" onClick={onReset}>
+              Reset <RotateCcw className="h-4 w-4" />
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
